@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Kjører Python-skriptet
+python /sti/til/ditt/python_skript.py
+
+# Sjekker om Python-skriptet kjørte vellykket
+if [ $? -eq 0 ]; then
+    # Kjører clasp push hvis Python-skriptet var vellykket
+    clasp push
+else
+    echo "Python-skriptet feilet. Avbryter push."
+    exit 1
+fi

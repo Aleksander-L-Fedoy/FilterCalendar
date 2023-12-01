@@ -1,7 +1,7 @@
 # Google Kalender Synkroniseringsverktøy
 
 ## Beskrivelse
-Dette prosjektet inneholder et sett med Google Apps Script-funksjoner designet for å synkronisere hendelser fra en kildekalender til flere målkalendere innenfor Google Kalender. Det gir muligheten til å filtrere og velge spesifikke hendelser basert på deres titler, datoer, og ukenummer, samt tilbyr funksjonalitet for automatisk sletting av hendelser for å unngå duplikater.
+Dette prosjektet inneholder et sett med Google Apps Script-funksjoner designet for å synkronisere hendelser fra en kildekalender til flere målkalendere innenfor Google Kalender. Det gir muligheten til å filtrere og velge spesifikke hendelser basert på deres titler, datoer, og ukenummer, samt tilbyr funksjonalitet for automatisk sletting av hendelser for å unngå duplikater. Dette prosjektet inneholder to hovedskript: `filtrerKalenderKopi.js` og `sletteKalenderKopi.js`, som sammen sørger for en måte abbonnere på andre kalendere og filtrer ut kun ønskete hendelser. Prosjektet inneholder også et kopierings-skript: `syncFiler.py` som kan brukes for å raskt og effektiv synkronisere de faktiske skripetene uten å kopiere og dele de faktiske id-ene til kalenderne dine. I tilegg innholder det et pre-commit-skript `pre-commit` som kan brukes for å lage en pre-commit-hook, som kjører både kopieringsskripet og pusher til Google Apps Script området/nettsiden for å automatisere prosessen.
 
 ## Funksjoner
 
@@ -31,7 +31,7 @@ For å maksimere effektiviteten av disse skriptene, kan du sette opp automatiser
 
 ## Python Fil Synkroniseringsskript
 
-Dette repositoriet inkluderer også et Python-skript (`sync_files_except_N_lines.py`) for å hjelpe med å håndtere og synkronisere skriptfiler. Skriptet er designet for å synkronisere endringer fra en hovedfil til en duplikatfil, mens det beholder de første N linjene i duplikatfilen uendret. Dette er spesielt nyttig for å holde konfigurasjonsdata eller sensitive informasjon adskilt fra hovedkoden.
+Dette repositoriet inkluderer også et Python-skript (`syncFiler.py`) for å hjelpe med å håndtere og synkronisere skriptfiler. Skriptet er designet for å synkronisere endringer fra en hovedfil til en duplikatfil, mens det beholder de første N linjene i duplikatfilen uendret. Dette er spesielt nyttig for å holde konfigurasjonsdata eller sensitive informasjon adskilt fra hovedkoden.
 
 ### Bruk
 

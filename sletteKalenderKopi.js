@@ -1,5 +1,5 @@
 const schoolCalendarId = 'example@group.calendar.google.com'; 
-const workCalendarId = 'example@group.calendar.google.com'; 
+const workCalendarId = 'example@group.calendar.google.com';
 
 function deleteAllEventsInSchoolCalendar() {
   deleteAllEventsInTargetCalendar(schoolCalendarId);

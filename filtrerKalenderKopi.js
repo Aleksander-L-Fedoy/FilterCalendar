@@ -5,8 +5,6 @@ function copyFilteredEvents() {
 
   const sourceCalendar = CalendarApp.getCalendarById(sourceCalendarId);
   const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
-  const sourceCalendar = CalendarApp.getCalendarById(sourceCalendarId);
-  const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
   const workCalendar = CalendarApp.getCalendarById(workCalendarId);
 
   const startDate = new Date();

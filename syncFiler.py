@@ -28,7 +28,7 @@ if __name__ == '__main__':
     # Definer filstier
     original_file = './filtrerKalender.js'
     duplicate_file = './filtrerKalenderKopi.js'
-    n_lines_to_keep = 4
+    n_lines_to_keep = 7
 
     sync_files_except_N_lines(original_file,duplicate_file,n_lines_to_keep)
 

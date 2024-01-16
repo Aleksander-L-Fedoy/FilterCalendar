@@ -52,12 +52,13 @@ function addMeetings(workCalendarId) {
   let currentDate = new Date();
   while (currentDate <= endDate) {
     if (isTuesday(currentDate) || isFriday(currentDate)) {
-      let eventStartTime = new Date();
+      let eventStartTime = new Date(currentDate);
       eventStartTime.setHours(11, 0, 0, 0);
 
-      let eventEndTime = new Date();
+      let eventEndTime = new Date(currentDate);
       eventEndTime.setHours(12, 0, 0, 0);
-      
+
+      Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
       workCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
         location: eventLocation,
       });

@@ -35,11 +35,11 @@ def sync_files(original_file, duplicate_file):
 if __name__ == '__main__':
     # Definer filstier
     original_file = './filtrerKalender.js'
-    duplicate_file = './filtrerKalenderKopi.js'
+    duplicate_file = './.filtrerKalenderKopi.js'
 
     sync_files(original_file,duplicate_file)
 
     original_file = './sletteKalender.js'
-    duplicate_file = './sletteKalenderKopi.js'
+    duplicate_file = './.sletteKalenderKopi.js'
 
     sync_files(original_file,duplicate_file)

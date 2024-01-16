@@ -14,6 +14,8 @@ function copyFilteredEvents() {
   deleteAllEventsInTargetCalendar(schoolCalendarId, startDate, endDate);
   deleteAllEventsInTargetCalendar(workCalendarId, startDate, endDate);
 
+  addMeetings(workCalendarId);
+
   const events = sourceCalendar.getEvents(startDate, endDate);
 
   for (let i = 0; i < events.length; i++) {
@@ -22,27 +24,45 @@ function copyFilteredEvents() {
     const eventEndTime = event.getEndTime();
     const eventTitle = event.getTitle();
     const eventLocation = event.getLocation();
-    const weekNumber = getWeekNumber(eventStartTime);
 
-    if (weekNumber == 45 || weekNumber == 46) {
-      if (isTuesday(eventStartTime)) {
-        if (
-          eventTitle.includes("Gruppe 19") ||
-          eventTitle.includes("Gruppe 22")
-        ) {
-          Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
-          workCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
-            location: eventLocation,
-          });
-        }
-      }
-    }
-    if (!eventTitle.includes("INF100")) {
+    if (eventTitle.includes("Gruppe 8")) {
+      Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
+      workCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
+        location: eventLocation,
+      });
+    } else if (!eventTitle.includes("INF101")) {
       Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
       schoolCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
         location: eventLocation,
       });
     }
+  }
+}
+
+function addMeetings(workCalendarId) {
+  const workCalendar = CalendarApp.getCalendarById(workCalendarId);
+
+  const startDate = new Date();
+  const endDate = new Date();
+  endDate.setDate(startDate.getDate() + 30);
+
+  const eventTitle = "INF101 Gruppledermøte";
+  const eventLocation = "Kremle, møterommet i fjerde etasje på Høytek";
+
+  let currentDate = new Date();
+  while (currentDate <= endDate) {
+    if (isTuesday(currentDate) || isFriday(currentDate)) {
+      let eventStartTime = new Date();
+      eventStartTime.setHours(11, 0, 0, 0);
+
+      let eventEndTime = new Date();
+      eventEndTime.setHours(12, 0, 0, 0);
+      
+      workCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
+        location: eventLocation,
+      });
+    }
+    currentDate.setDate(currentDate.getDate() + 1);
   }
 }
 

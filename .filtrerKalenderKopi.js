@@ -46,7 +46,7 @@ function addMeetings(workCalendarId) {
   const endDate = new Date();
   endDate.setDate(startDate.getDate() + 30);
 
-  const eventTitle = "INF101 Gruppledermøte";
+  const eventTitle = "INF101 Gruppeledermøte";
   const eventLocation = "Kremle, møterommet i fjerde etasje på Høytek";
 
   let currentDate = new Date();

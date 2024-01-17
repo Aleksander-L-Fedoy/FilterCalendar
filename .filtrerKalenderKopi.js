@@ -1,5 +1,6 @@
 function copyFilteredEvents() {
   const sourceCalendarId = 'example@import.calendar.google.com';
+  const courseCalendarId = 'example@import.calendar.google.com';
   const schoolCalendarId = 'example@group.calendar.google.com'; 
   const workCalendarId = 'example@group.calendar.google.com'; 
 
@@ -16,6 +17,8 @@ function copyFilteredEvents() {
 
   addMeetings(workCalendarId);
 
+  addSpesificCourse(courseCalendarId, schoolCalendarId)
+
   const events = sourceCalendar.getEvents(startDate, endDate);
 
   for (let i = 0; i < events.length; i++) {
@@ -30,7 +33,10 @@ function copyFilteredEvents() {
       workCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
         location: eventLocation,
       });
-    } else if (!eventTitle.includes("INF101")) {
+    } else if (
+      !eventTitle.includes("INF101") &&
+      !eventTitle.includes("INF265")
+    ) {
       Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
       schoolCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
         location: eventLocation,
@@ -64,6 +70,30 @@ function addMeetings(workCalendarId) {
       });
     }
     currentDate.setDate(currentDate.getDate() + 1);
+  }
+}
+
+function addSpesificCourse(courseCalendarId, schoolCalendarId) {
+  const courseCalendar = CalendarApp.getCalendarById(courseCalendarId);
+  const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
+
+  const startDate = new Date();
+  const endDate = new Date();
+  endDate.setDate(startDate.getDate() + 30);
+
+  const events = courseCalendar.getEvents(startDate, endDate);
+
+  for (let i = 0; i < events.length; i++) {
+    const event = events[i];
+    const eventStartTime = event.getStartTime();
+    const eventEndTime = event.getEndTime();
+    const eventTitle = event.getTitle();
+    const eventLocation = event.getLocation();
+
+    Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
+    schoolCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
+      location: eventLocation,
+    });
   }
 }
 

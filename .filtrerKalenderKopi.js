@@ -16,6 +16,7 @@ function copyFilteredEvents() {
   deleteAllEventsInTargetCalendar(workCalendarId, startDate, endDate);
 
   addMeetings(workCalendarId);
+  addDeadline(schoolCalendarId)
 
   addSpesificCourse(courseCalendarId, schoolCalendarId)
 
@@ -66,6 +67,34 @@ function addMeetings(workCalendarId) {
 
       Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
       workCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
+        location: eventLocation,
+      });
+    }
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+}
+
+function addDeadline(schoolCalendarId) {
+  const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
+
+  const startDate = new Date();
+  const endDate = new Date();
+  endDate.setDate(startDate.getDate() + 30);
+
+  const eventTitle = "Frist Quiz i INF265";
+  const eventLocation = "MittUiB";
+
+  let currentDate = new Date();
+  while (currentDate <= endDate) {
+    if (isTuesday(currentDate)) {
+      let eventStartTime = new Date(currentDate);
+      eventStartTime.setHours(12, 0, 0, 0);
+
+      let eventEndTime = new Date(currentDate);
+      eventEndTime.setHours(13, 0, 0, 0);
+
+      Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
+      schoolCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
         location: eventLocation,
       });
     }

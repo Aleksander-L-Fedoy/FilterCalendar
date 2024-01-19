@@ -3,6 +3,14 @@
 ## Beskrivelse
 Dette prosjektet inneholder et sett med Google Apps Script-funksjoner designet for å synkronisere hendelser fra en kildekalender til flere målkalendere innenfor Google Kalender. Det gir muligheten til å filtrere og velge spesifikke hendelser basert på deres titler, datoer, og ukenummer, samt tilbyr funksjonalitet for automatisk sletting av hendelser for å unngå duplikater. Dette prosjektet inneholder to hovedskript: `filtrerKalenderKopi.js` og `sletteKalenderKopi.js`, som sammen sørger for en måte abbonnere på andre kalendere og filtrer ut kun ønskete hendelser. Prosjektet inneholder også et kopierings-skript: `syncFiler.py` som kan brukes for å raskt og effektiv synkronisere de faktiske skripetene uten å kopiere og dele de faktiske id-ene til kalenderne dine. I tilegg innholder det et pre-commit-skript `pre-commit` som kan brukes for å lage en pre-commit-hook, som kjører både kopieringsskripet og pusher til Google Apps Script området/nettsiden for å automatisere prosessen.
 
+## Før
+
+![Før](før.png)
+
+## Etter
+
+![Etter](etter.png)
+
 ## Funksjoner
 
 - **Hendelsesfiltrering:** Velg og kopier hendelser basert på titler, ukedager, og ukenummer.

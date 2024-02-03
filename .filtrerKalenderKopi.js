@@ -4,21 +4,24 @@ function copyFilteredEvents() {
   const schoolCalendarId = 'example@group.calendar.google.com'; 
   const workCalendarId = 'example@group.calendar.google.com'; 
 
-  const sourceCalendar = CalendarApp.getCalendarById(sourceCalendarId);
-  const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
-  const workCalendar = CalendarApp.getCalendarById(workCalendarId);
+const sourceCalendar = CalendarApp.getCalendarById(sourceCalendarId);
+const courseCalendar = CalendarApp.getCalendarById(courseCalendarId);
+const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
+const workCalendar = CalendarApp.getCalendarById(workCalendarId);
 
-  const startDate = new Date();
-  const endDate = new Date();
-  endDate.setDate(startDate.getDate() + 30);
+const startDate = new Date();
+const endDate = new Date();
+endDate.setDate(startDate.getDate() + 30);
 
-  deleteAllEventsInTargetCalendar(schoolCalendarId, startDate, endDate);
-  deleteAllEventsInTargetCalendar(workCalendarId, startDate, endDate);
+function copyFilteredEvents() {
+  
+  deleteAllEventsInTargetCalendar(schoolCalendarId);
+  deleteAllEventsInTargetCalendar(workCalendarId);
 
-  addMeetings(workCalendarId);
-  addDeadline(schoolCalendarId)
+  addMeetings();
+  addDeadline()
 
-  addSpesificCourse(courseCalendarId, schoolCalendarId)
+  addSpesificCourse()
 
   const events = sourceCalendar.getEvents(startDate, endDate);
 
@@ -46,13 +49,7 @@ function copyFilteredEvents() {
   }
 }
 
-function addMeetings(workCalendarId) {
-  const workCalendar = CalendarApp.getCalendarById(workCalendarId);
-
-  const startDate = new Date();
-  const endDate = new Date();
-  endDate.setDate(startDate.getDate() + 30);
-
+function addMeetings() {
   const eventTitle = "INF101 Gruppeledermøte";
   const eventLocation = "Kremle, møterommet i fjerde etasje på Høytek";
 
@@ -74,13 +71,7 @@ function addMeetings(workCalendarId) {
   }
 }
 
-function addDeadline(schoolCalendarId) {
-  const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
-
-  const startDate = new Date();
-  const endDate = new Date();
-  endDate.setDate(startDate.getDate() + 30);
-
+function addDeadline() {
   const eventTitle = "Frist Quiz i INF265";
   const eventLocation = "MittUiB";
 
@@ -102,14 +93,7 @@ function addDeadline(schoolCalendarId) {
   }
 }
 
-function addSpesificCourse(courseCalendarId, schoolCalendarId) {
-  const courseCalendar = CalendarApp.getCalendarById(courseCalendarId);
-  const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
-
-  const startDate = new Date();
-  const endDate = new Date();
-  endDate.setDate(startDate.getDate() + 30);
-
+function addSpesificCourse() {
   const events = courseCalendar.getEvents(startDate, endDate);
 
   for (let i = 0; i < events.length; i++) {
@@ -126,7 +110,7 @@ function addSpesificCourse(courseCalendarId, schoolCalendarId) {
   }
 }
 
-function deleteAllEventsInTargetCalendar(targetCalendarId, startDate, endDate) {
+function deleteAllEventsInTargetCalendar(targetCalendarId) {
   const targetCalendar = CalendarApp.getCalendarById(targetCalendarId);
   if (!targetCalendar) {
     Logger.log("Kunne ikke finne kalenderen med ID: " + targetCalendarId);

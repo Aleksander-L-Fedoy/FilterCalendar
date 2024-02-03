@@ -13,14 +13,15 @@ const endDate = new Date();
 endDate.setDate(startDate.getDate() + 30);
 
 function copyFilteredEvents() {
-  
   deleteAllEventsInTargetCalendar(schoolCalendarId);
   deleteAllEventsInTargetCalendar(workCalendarId);
 
   addMeetings();
-  addDeadline()
+  addDeadline();
+  
+  addSignUpBedPres();
 
-  addSpesificCourse()
+  addSpesificCourse();
 
   const events = sourceCalendar.getEvents(startDate, endDate);
 
@@ -92,6 +93,28 @@ function addDeadline() {
   }
 }
 
+function addSignUpBedPres() {
+  const eventTitle = "Påmelding bedriftspresentasjon";
+  const eventLocation = "echo.no";
+
+  let currentDate = new Date();
+  while (currentDate <= endDate) {
+    if (isThursday(currentDate)) {
+      let eventStartTime = new Date(currentDate);
+      eventStartTime.setHours(12, 0, 0, 0);
+
+      let eventEndTime = new Date(currentDate);
+      eventEndTime.setHours(13, 0, 0, 0);
+
+      Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
+      schoolCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
+        location: eventLocation,
+      });
+    }
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+}
+
 function addSpesificCourse() {
   const events = courseCalendar.getEvents(startDate, endDate);
 
@@ -144,6 +167,10 @@ function isTuesday(date) {
 
 function isWednesday(date) {
   return date.getDay() === 3;
+}
+
+function isThursday(date) {
+  return date.getDay() === 4;
 }
 
 function isFriday(date) {

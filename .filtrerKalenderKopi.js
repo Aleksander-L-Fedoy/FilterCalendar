@@ -12,7 +12,7 @@ const startDate = new Date();
 const endDate = new Date();
 endDate.setDate(startDate.getDate() + 30);
 
-function copyFilteredEvents() {
+function main(){
   deleteAllEventsInTargetCalendar(schoolCalendarId);
   deleteAllEventsInTargetCalendar(workCalendarId);
 
@@ -23,6 +23,10 @@ function copyFilteredEvents() {
 
   addSpesificCourse();
 
+  copyFilteredEvents();
+}
+
+function copyFilteredEvents() {
   const events = sourceCalendar.getEvents(startDate, endDate);
 
   for (let i = 0; i < events.length; i++) {

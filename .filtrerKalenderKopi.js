@@ -1,8 +1,7 @@
-function copyFilteredEvents() {
-  const sourceCalendarId = 'example@import.calendar.google.com';
-  const courseCalendarId = 'example@import.calendar.google.com';
-  const schoolCalendarId = 'example@group.calendar.google.com'; 
-  const workCalendarId = 'example@group.calendar.google.com'; 
+const sourceCalendarId = 'example@import.calendar.google.com';
+const courseCalendarId = 'example@import.calendar.google.com';
+const schoolCalendarId = 'example@group.calendar.google.com'; 
+const workCalendarId = 'example@group.calendar.google.com'; 
 
 const sourceCalendar = CalendarApp.getCalendarById(sourceCalendarId);
 const courseCalendar = CalendarApp.getCalendarById(courseCalendarId);

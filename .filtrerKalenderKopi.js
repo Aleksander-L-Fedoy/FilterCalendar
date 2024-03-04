@@ -4,7 +4,6 @@ const schoolCalendarId = 'example@group.calendar.google.com';
 const workCalendarId = 'example@group.calendar.google.com'; 
 
 const sourceCalendar = CalendarApp.getCalendarById(sourceCalendarId);
-const courseCalendar = CalendarApp.getCalendarById(courseCalendarId);
 const schoolCalendar = CalendarApp.getCalendarById(schoolCalendarId);
 const workCalendar = CalendarApp.getCalendarById(workCalendarId);
 
@@ -12,16 +11,12 @@ const startDate = new Date();
 const endDate = new Date();
 endDate.setDate(startDate.getDate() + 30);
 
-function main(){
+function main() {
   deleteAllEventsInTargetCalendar(schoolCalendarId);
   deleteAllEventsInTargetCalendar(workCalendarId);
 
   addMeetings();
-  addDeadline();
-  
   addSignUpBedPres();
-
-  addSpesificCourse();
 
   copyFilteredEvents();
 }
@@ -75,35 +70,13 @@ function addMeetings() {
   }
 }
 
-function addDeadline() {
-  const eventTitle = "Frist Quiz i INF265";
-  const eventLocation = "MittUiB";
-
-  let currentDate = new Date();
-  while (currentDate <= endDate) {
-    if (isTuesday(currentDate)) {
-      let eventStartTime = new Date(currentDate);
-      eventStartTime.setHours(12, 0, 0, 0);
-
-      let eventEndTime = new Date(currentDate);
-      eventEndTime.setHours(13, 0, 0, 0);
-
-      Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
-      schoolCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
-        location: eventLocation,
-      });
-    }
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
-}
-
 function addSignUpBedPres() {
   const eventTitle = "Påmelding bedriftspresentasjon";
   const eventLocation = "echo.no";
 
   let currentDate = new Date();
   while (currentDate <= endDate) {
-    if (isThursday(currentDate)) {
+    if (isTuesday(currentDate) || isThursday(currentDate)) {
       let eventStartTime = new Date(currentDate);
       eventStartTime.setHours(12, 0, 0, 0);
 
@@ -116,23 +89,6 @@ function addSignUpBedPres() {
       });
     }
     currentDate.setDate(currentDate.getDate() + 1);
-  }
-}
-
-function addSpesificCourse() {
-  const events = courseCalendar.getEvents(startDate, endDate);
-
-  for (let i = 0; i < events.length; i++) {
-    const event = events[i];
-    const eventStartTime = event.getStartTime();
-    const eventEndTime = event.getEndTime();
-    const eventTitle = event.getTitle();
-    const eventLocation = event.getLocation();
-
-    Logger.log(eventTitle + " " + eventStartTime + " " + eventLocation);
-    schoolCalendar.createEvent(eventTitle, eventStartTime, eventEndTime, {
-      location: eventLocation,
-    });
   }
 }
 
